@@ -37,6 +37,7 @@ func main() {
 
 		// Get and and unzip if object exists
 		if exists {
+			os.Stdout.WriteString("::set-output name=cache-hit::true")
 			if err := GetObject(action.Key, action.Bucket); err != nil {
 				log.Fatal(err)
 			}
@@ -45,6 +46,7 @@ func main() {
 				log.Fatal(err)
 			}
 		} else {
+			os.Stdout.WriteString("::set-output name=cache-hit::false")
 			log.Printf("No caches found for the following key: %s", action.Key)
 		}
 	case DeleteAction:
