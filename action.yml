@@ -29,10 +29,15 @@ inputs:
     description: "Specifies the desired Storage Class for the object."
     required: false
     default: STANDARD
+outputs:
+  cache-hit:
+    description: 'A boolean value to indicate an exact match was found for the primary key'
+    value: ${{ steps.run-action.outputs.cache-hit }}
 runs:
   using: "composite"
   steps:
-    - run: $GITHUB_ACTION_PATH/entrypoint.sh
+    - id: run-action
+      run: $GITHUB_ACTION_PATH/entrypoint.sh
       shell: sh
       env:
         ACTION: ${{ inputs.action }}
