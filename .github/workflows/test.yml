@@ -27,11 +27,11 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ matrix.os }}" == ubuntu-* ]]; then
-            echo "::set-output name=GOOS::linux"
+            echo "name=GOOS::linux" >> $GITHUB_OUTPUT
           elif [[ "${{ matrix.os }}" == macos-* ]]; then
-            echo "::set-output name=GOOS::darwin"
+            echo "name=GOOS::darwin" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=GOOS::windows"
+            echo "name=GOOS::windows">> $GITHUB_OUTPUT
           fi
 
       - name: Build binary
